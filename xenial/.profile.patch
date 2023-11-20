@@ -1,0 +1,11 @@
+--- .profile    2022-09-24 01:05:40.000000000 +0000
++++ .profile.new        2022-09-24 01:12:33.725384932 +0000
+@@ -18,3 +18,8 @@
+
+ # set PATH so it includes user's private bin directories
+ PATH="$HOME/bin:$HOME/.local/bin:$PATH"
++
++if [ "$SHELL" != "/usr/bin/zsh" -a -n "$SSH_TTY" -a -x /usr/bin/zsh ]; then
++  export SHELL="/usr/bin/zsh"
++  exec $SHELL -l
++fi

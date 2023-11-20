@@ -1,0 +1,33 @@
+services:
+  app:
+    cap_add:
+      - ALL
+    command: sleep infinity
+    container_name: ubuntu-dev-app
+    dns:
+      - 8.8.8.8
+      - 114.114.114.114
+    env_file: .env
+    entrypoint: "bash /entrypoint.sh"
+    image: onionyst/ubuntu-dev:latest
+    init: true
+    networks:
+      - net
+    ports:
+      - "0.0.0.0:22222:22"
+    privileged: true
+    security_opt:
+      - seccomp:unconfined
+    stdin_open: true
+    tty: true
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 20000
+        hard: 40000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+networks:
+  net:
+    name: ubuntu-dev-net

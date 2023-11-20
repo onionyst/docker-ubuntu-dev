@@ -1,0 +1,11 @@
+--- .profile    2022-05-18 17:35:39.000000000 +0000
++++ .profile.new        2022-05-18 17:46:42.201182605 +0000
+@@ -25,3 +25,8 @@
+ if [ -d "$HOME/.local/bin" ] ; then
+     PATH="$HOME/.local/bin:$PATH"
+ fi
++
++if [ "$SHELL" != "/usr/bin/zsh" -a -n "$SSH_TTY" -a -x /usr/bin/zsh ]; then
++  export SHELL="/usr/bin/zsh"
++  exec $SHELL -l
++fi

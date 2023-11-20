@@ -1,0 +1,36 @@
+--- /etc/ssh/sshd_config         2023-10-30 03:48:51.058438895 +0000
++++ /etc/ssh/sshd_config.new     2023-10-30 03:50:10.063746494 +0000
+@@ -12,7 +12,7 @@
+ Include /etc/ssh/sshd_config.d/*.conf
+
+ #Port 22
+-#AddressFamily any
++AddressFamily inet
+ #ListenAddress 0.0.0.0
+ #ListenAddress ::
+
+@@ -21,10 +21,14 @@
+ #HostKey /etc/ssh/ssh_host_ed25519_key
+
+ # Ciphers and keying
++Ciphers chacha20-poly1305@openssh.com,aes128-gcm@openssh.com,aes256-gcm@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr
++HostKeyAlgorithms ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha2-512
++KexAlgorithms curve25519-sha256,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group16-sha512
++MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com
+ #RekeyLimit default none
+
+ # Logging
+-#SyslogFacility AUTH
++SyslogFacility AUTHPRIV
+ #LogLevel INFO
+
+ # Authentication:
+@@ -54,7 +58,7 @@
+ #IgnoreRhosts yes
+
+ # To disable tunneled clear text passwords, change to no here!
+-#PasswordAuthentication yes
++PasswordAuthentication no
+ #PermitEmptyPasswords no
+
+ # Change to yes to enable challenge-response passwords (beware issues with
