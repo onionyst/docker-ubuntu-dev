@@ -357,6 +357,11 @@ RUN apt-get install -y \
         libxt6 \
         ninja-build
 
+RUN update-alternatives \
+        --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC_VERSION} ${GCC_VERSION} \
+        --slave /usr/bin/g++ g++ /usr/bin/g++-${GCC_VERSION} \
+        --slave /usr/bin/gcov gcov /usr/bin/gcov-${GCC_VERSION}
+
 # Install Docker client
 RUN install -m 0755 -d /etc/apt/keyrings && \
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | /usr/local/ulib/bin/gpg --dearmor -o /etc/apt/keyrings/docker.gpg && \

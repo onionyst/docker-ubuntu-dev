@@ -123,7 +123,7 @@ alias LLVMCC="CC=clang CXX=clang++ LD=ld.lld AR=llvm-ar NM=llvm-nm \
 alias v2raya="v2raya --v2ray-assetsdir ~/.config/v2ray --lite"
 
 function setproxy() {
-  export {all,http,https}_proxy=socks5://127.0.0.1:1080
+  export {all,http,https}_proxy=socks5://127.0.0.1:20170
 }
 function unsetproxy() {
   unset {all,http,https}_proxy

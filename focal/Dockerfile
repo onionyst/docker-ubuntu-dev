@@ -166,6 +166,11 @@ RUN wget -O - https://apt.llvm.org/llvm.sh | bash -s -- ${CLANG_VERSION} && \
     chmod +x /tmp/clang.sh && \
     apt-get install -y clang-format-${CLANG_VERSION} && \
     /tmp/clang.sh && \
+    update-alternatives --remove-all gcc && \
+    update-alternatives \
+        --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC_VERSION} ${GCC_VERSION} \
+        --slave /usr/bin/g++ g++ /usr/bin/g++-${GCC_VERSION} \
+        --slave /usr/bin/gcov gcov /usr/bin/gcov-${GCC_VERSION} && \
     rm /tmp/clang.sh
 
 # Install Docker client and Compose
