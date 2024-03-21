@@ -120,10 +120,10 @@ alias LLVMCC="CC=clang CXX=clang++ LD=ld.lld AR=llvm-ar NM=llvm-nm \
   STRIP=llvm-strip OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump \
   READELF=llvm-readelf HOSTCC=clang HOSTCXX=clang++ HOSTAR=llvm-ar \
   HOSTLD=ld.lld"
-alias v2raya="v2raya --v2ray-assetsdir ~/.config/v2ray --lite"
+alias v2raya="v2raya --v2ray-assetsdir ~/.config/v2ray -a 127.0.0.1:2017 --lite"
 
 function setproxy() {
-  export {all,http,https}_proxy=socks5://127.0.0.1:20170
+  export {all,http,https}_proxy=http://127.0.0.1:20171
 }
 function unsetproxy() {
   unset {all,http,https}_proxy

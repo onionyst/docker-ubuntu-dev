@@ -54,6 +54,7 @@ RUN sed -i "s/# deb-src/deb-src/g" /etc/apt/sources.list && \
     apt-get build-dep -y python3 && \
     apt-get install -y \
         autoconf \
+        bison \
         blt-dev \
         build-essential \
         bzip2 \
@@ -95,8 +96,8 @@ RUN sed -i "s/# deb-src/deb-src/g" /etc/apt/sources.list && \
     sed -i "s/deb-src/# deb-src/g" /etc/apt/sources.list
 
 # Install CMake
-ARG CMAKE_VERSION=3.27.8
-ARG CMAKE_SHA256=c43e9237360f8cb227c721bb7cd497f80cff692a7dc0ab10d258f4c22d6aec04
+ARG CMAKE_VERSION=3.28.3
+ARG CMAKE_SHA256=1276929b8a73a284652b42f449e2f29efe759ee18105f5bc3175a8a636c754c0
 RUN mkdir -p /install/cmake && \
     cd /install/cmake && \
     curl -fsSOL https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-x86_64.sh && \
@@ -106,7 +107,7 @@ RUN mkdir -p /install/cmake && \
     ldconfig
 
 # Install Libgpg-error
-ARG LIBGPG_ERROR_VERSION=1.47
+ARG LIBGPG_ERROR_VERSION=1.48
 RUN mkdir -p /install/libgpg-error && \
     cd /install/libgpg-error && \
     curl -fsSOL https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-${LIBGPG_ERROR_VERSION}.tar.bz2 && \
@@ -137,7 +138,7 @@ RUN mkdir -p /install/libgcrypt && \
     ldconfig
 
 # Install Libksba
-ARG LIBKSBA_VERSION=1.6.5
+ARG LIBKSBA_VERSION=1.6.6
 RUN mkdir -p /install/libksba && \
     cd /install/libksba && \
     curl -fsSOL https://gnupg.org/ftp/gcrypt/libksba/libksba-${LIBKSBA_VERSION}.tar.bz2 && \
@@ -152,7 +153,7 @@ RUN mkdir -p /install/libksba && \
     ldconfig
 
 # Install Libassuan
-ARG LIBASSUAN_VERSION=2.5.6
+ARG LIBASSUAN_VERSION=2.5.7
 RUN mkdir -p /install/libassuan && \
     cd /install/libassuan && \
     curl -fsSOL https://gnupg.org/ftp/gcrypt/libassuan/libassuan-${LIBASSUAN_VERSION}.tar.bz2 && \
@@ -168,7 +169,7 @@ RUN mkdir -p /install/libassuan && \
     ldconfig
 
 # Install npth
-ARG NPTH_VERSION=1.6
+ARG NPTH_VERSION=1.7
 RUN mkdir -p /install/npth && \
     cd /install/npth && \
     curl -fsSOL https://gnupg.org/ftp/gcrypt/npth/npth-${NPTH_VERSION}.tar.bz2 && \
@@ -184,7 +185,7 @@ RUN mkdir -p /install/npth && \
     ldconfig
 
 # Install Pinentry
-ARG PINENTRY_VERSION=1.2.1
+ARG PINENTRY_VERSION=1.3.0
 RUN mkdir -p /install/pinentry && \
     cd /install/pinentry && \
     curl -fsSOL https://gnupg.org/ftp/gcrypt/pinentry/pinentry-${PINENTRY_VERSION}.tar.bz2 && \
@@ -199,7 +200,7 @@ RUN mkdir -p /install/pinentry && \
     ldconfig
 
 # Install GnuPG
-ARG GNUPG_VERSION=2.4.3
+ARG GNUPG_VERSION=2.4.5
 RUN mkdir -p /install/gnupg && \
     cd /install/gnupg && \
     curl -fsSOL https://gnupg.org/ftp/gcrypt/gnupg/gnupg-${GNUPG_VERSION}.tar.bz2 && \
@@ -215,7 +216,7 @@ RUN mkdir -p /install/gnupg && \
     ldconfig
 
 # Install OpenSSL
-ARG OPENSSL_VERSION=3.1.4
+ARG OPENSSL_VERSION=3.2.1
 RUN mkdir -p /install/openssl && \
     cd /install/openssl && \
     curl -fsSOL https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz && \
@@ -231,7 +232,7 @@ RUN mkdir -p /install/openssl && \
 
 # Install Python
 ARG PYTHON_VERSION
-ARG PYTHON_PATCH_VERSION=18
+ARG PYTHON_PATCH_VERSION=19
 RUN mkdir -p /install/python && \
     cd /install/python && \
     curl -fsSOL https://www.python.org/ftp/python/${PYTHON_VERSION}.${PYTHON_PATCH_VERSION}/Python-${PYTHON_VERSION}.${PYTHON_PATCH_VERSION}.tar.xz && \
@@ -268,8 +269,8 @@ RUN mkdir -p /install/ncurses && \
     ldconfig
 
 # Install Vim
-ARG VIM_VERSION=9.0.2116
-ARG VIM_SHA256=a79783d6e2a46ba446fc695cdb1aa26be511f9db4826aa40b57c89b0392c59ba
+ARG VIM_VERSION=9.1.0193
+ARG VIM_SHA256=895833fa1b5a08cc7c33589c00b5e0c3198d525768944e729d3b89574bebc727
 RUN mkdir -p /install/vim && \
     cd /install/vim && \
     curl -fsSOL https://github.com/vim/vim/archive/refs/tags/v${VIM_VERSION}.tar.gz && \
@@ -310,8 +311,8 @@ RUN mkdir -p /install/libevent && \
     ldconfig
 
 # Install tmux (requires libevent and ncurses)
-ARG TMUX_VERSION=3.3a
-ARG TMUX_SHA256=e4fd347843bd0772c4f48d6dde625b0b109b7a380ff15db21e97c11a4dcdf93f
+ARG TMUX_VERSION=3.4
+ARG TMUX_SHA256=551ab8dea0bf505c0ad6b7bb35ef567cdde0ccb84357df142c254f35a23e19aa
 RUN mkdir -p /install/tmux && \
     cd /install/tmux && \
     curl -fsSOL https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz && \
@@ -327,7 +328,7 @@ RUN mkdir -p /install/tmux && \
     ldconfig
 
 # Install GDB
-ARG GDB_VERSION=13.2
+ARG GDB_VERSION=14.2
 RUN mkdir -p /install/gdb && \
     cd /install/gdb && \
     curl -fsSOL https://ftp.gnu.org/gnu/gdb/gdb-${GDB_VERSION}.tar.xz && \
@@ -373,7 +374,7 @@ RUN install -m 0755 -d /etc/apt/keyrings && \
     apt-get install -y docker-ce-cli
 
 # Install Docker Compose
-ARG DOCKER_COMPOSE_VERSION=2.23.1
+ARG DOCKER_COMPOSE_VERSION=2.25.0
 RUN mkdir -p /usr/local/lib/docker/cli-plugins && \
     curl -fsSL "https://github.com/docker/compose/releases/download/v$DOCKER_COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)" \
         -o /usr/local/lib/docker/cli-plugins/docker-compose && \
@@ -445,9 +446,9 @@ RUN mkdir -p .gdb && \
     (cd .gdb/pwndbg; PATH="/usr/local/ulib/bin:${PATH}" ./setup.sh)
 
 # Install v2ray and v2rayA
-ARG V2RAY_VERSION=5.11.0
-ARG V2RAYA_VERSION=2.2.4.3
-ARG LOYALSOLDIER_VERSION=202311192208
+ARG V2RAY_VERSION=5.14.1
+ARG V2RAYA_VERSION=2.2.5.1
+ARG LOYALSOLDIER_VERSION=202403202208
 RUN mkdir -p v2ray && \
     pushd v2ray && \
     curl -fsSOL https://github.com/v2fly/v2ray-core/releases/download/v${V2RAY_VERSION}/v2ray-linux-64.zip && \
@@ -470,6 +471,13 @@ RUN mkdir -p v2ray && \
     mv v2ray/geoip.dat .config/v2ray && \
     mv v2ray/geosite.dat .config/v2ray && \
     ln -s .config/v2ray/geosite.dat .config/v2ray/LoyalsoldierSite.dat
+
+# Finally reset default gcc
+RUN sudo update-alternatives --remove-all gcc && \
+    sudo update-alternatives \
+        --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC_VERSION} ${GCC_VERSION} \
+        --slave /usr/bin/g++ g++ /usr/bin/g++-${GCC_VERSION} \
+        --slave /usr/bin/gcov gcov /usr/bin/gcov-${GCC_VERSION}
 
 # Clean up
 RUN sudo rm -rf /var/lib/apt/lists/* v2ray

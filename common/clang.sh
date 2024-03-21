@@ -16,9 +16,9 @@ update-alternatives --install /usr/bin/clang clang $(which clang-$CLANG_VERSION)
   --slave /usr/bin/lld-link lld-link $(which lld-link-$CLANG_VERSION) \
   --slave /usr/bin/lldb lldb $(which lldb-$CLANG_VERSION) \
   --slave /usr/bin/lldb-argdumper lldb-argdumper $(which lldb-argdumper-$CLANG_VERSION) \
+  --slave /usr/bin/lldb-dap lldb-dap $(which lldb-dap-$CLANG_VERSION) \
   --slave /usr/bin/lldb-instr lldb-instr $(which lldb-instr-$CLANG_VERSION) \
   --slave /usr/bin/lldb-server lldb-server $(which lldb-server-$CLANG_VERSION) \
-  --slave /usr/bin/lldb-vscode lldb-vscode $(which lldb-vscode-$CLANG_VERSION) \
   --slave /usr/bin/lli lli $(which lli-$CLANG_VERSION) \
   --slave /usr/bin/lli-child-target lli-child-target $(which lli-child-target-$CLANG_VERSION) \
   --slave /usr/bin/llvm-PerfectShuffle llvm-PerfectShuffle $(which llvm-PerfectShuffle-$CLANG_VERSION) \
@@ -75,8 +75,8 @@ update-alternatives --install /usr/bin/clang clang $(which clang-$CLANG_VERSION)
   --slave /usr/bin/llvm-rc llvm-rc $(which llvm-rc-$CLANG_VERSION) \
   --slave /usr/bin/llvm-readelf llvm-readelf $(which llvm-readelf-$CLANG_VERSION) \
   --slave /usr/bin/llvm-readobj llvm-readobj $(which llvm-readobj-$CLANG_VERSION) \
+  --slave /usr/bin/llvm-readtapi llvm-readtapi $(which llvm-readtapi-$CLANG_VERSION) \
   --slave /usr/bin/llvm-reduce llvm-reduce $(which llvm-reduce-$CLANG_VERSION) \
-  --slave /usr/bin/llvm-remark-size-diff llvm-remark-size-diff $(which llvm-remark-size-diff-$CLANG_VERSION) \
   --slave /usr/bin/llvm-remarkutil llvm-remarkutil $(which llvm-remarkutil-$CLANG_VERSION) \
   --slave /usr/bin/llvm-rtdyld llvm-rtdyld $(which llvm-rtdyld-$CLANG_VERSION) \
   --slave /usr/bin/llvm-sim llvm-sim $(which llvm-sim-$CLANG_VERSION) \
@@ -86,7 +86,6 @@ update-alternatives --install /usr/bin/clang clang $(which clang-$CLANG_VERSION)
   --slave /usr/bin/llvm-strings llvm-strings $(which llvm-strings-$CLANG_VERSION) \
   --slave /usr/bin/llvm-strip llvm-strip $(which llvm-strip-$CLANG_VERSION) \
   --slave /usr/bin/llvm-symbolizer llvm-symbolizer $(which llvm-symbolizer-$CLANG_VERSION) \
-  --slave /usr/bin/llvm-tapi-diff llvm-tapi-diff $(which llvm-tapi-diff-$CLANG_VERSION) \
   --slave /usr/bin/llvm-tblgen llvm-tblgen $(which llvm-tblgen-$CLANG_VERSION) \
   --slave /usr/bin/llvm-tli-checker llvm-tli-checker $(which llvm-tli-checker-$CLANG_VERSION) \
   --slave /usr/bin/llvm-undname llvm-undname $(which llvm-undname-$CLANG_VERSION) \

@@ -1,6 +1,3 @@
-# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,dotenv
-# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,macos,dotenv
-
 ### dotenv ###
 .env
 
@@ -55,6 +52,4 @@ Temporary Items
 .history
 .ionide
 
-# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,dotenv
-
-# Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
+# Custom rules

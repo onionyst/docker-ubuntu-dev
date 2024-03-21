@@ -76,6 +76,7 @@ FROM base AS builder
 
 # Install dependencies
 RUN apt-get install -y \
+        bison \
         libssl-dev \
         zlib1g-dev
 
@@ -113,8 +114,8 @@ RUN mkdir -p /install/libevent && \
     ldconfig
 
 # Install tmux (requires libevent and ncurses)
-ARG TMUX_VERSION=3.3a
-ARG TMUX_SHA256=e4fd347843bd0772c4f48d6dde625b0b109b7a380ff15db21e97c11a4dcdf93f
+ARG TMUX_VERSION=3.4
+ARG TMUX_SHA256=551ab8dea0bf505c0ad6b7bb35ef567cdde0ccb84357df142c254f35a23e19aa
 RUN mkdir -p /install/tmux && \
     cd /install/tmux && \
     curl -fsSOL https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz && \
@@ -130,7 +131,7 @@ RUN mkdir -p /install/tmux && \
     ldconfig
 
 # Install GDB
-ARG GDB_VERSION=13.2
+ARG GDB_VERSION=14.2
 RUN mkdir -p /install/gdb && \
     cd /install/gdb && \
     curl -fsSOL https://ftp.gnu.org/gnu/gdb/gdb-${GDB_VERSION}.tar.xz && \
@@ -160,7 +161,7 @@ RUN add-apt-repository -y ppa:jonathonf/vim && \
     apt-get install -y vim
 
 # Install Clang
-ARG CLANG_VERSION=17
+ARG CLANG_VERSION=18
 COPY common/clang.sh /tmp
 RUN wget -O - https://apt.llvm.org/llvm.sh | bash -s -- ${CLANG_VERSION} && \
     chmod +x /tmp/clang.sh && \
@@ -248,9 +249,9 @@ RUN mkdir -p .gdb && \
     (cd .gdb/pwndbg; PATH="/usr/local/ulib/bin:${PATH}" ./setup.sh)
 
 # Install v2ray and v2rayA
-ARG V2RAY_VERSION=5.11.0
-ARG V2RAYA_VERSION=2.2.4.3
-ARG LOYALSOLDIER_VERSION=202311192208
+ARG V2RAY_VERSION=5.14.1
+ARG V2RAYA_VERSION=2.2.5.1
+ARG LOYALSOLDIER_VERSION=202403202208
 RUN mkdir -p v2ray && \
     pushd v2ray && \
     curl -fsSOL https://github.com/v2fly/v2ray-core/releases/download/v${V2RAY_VERSION}/v2ray-linux-64.zip && \
@@ -272,7 +273,15 @@ RUN mkdir -p v2ray && \
     mkdir -p .config/v2ray && \
     mv v2ray/geoip.dat .config/v2ray && \
     mv v2ray/geosite.dat .config/v2ray && \
-    ln -s .config/v2ray/geosite.dat .config/v2ray/LoyalsoldierSite.dat
+    pushd .config/v2ray && \
+    ln -s geosite.dat LoyalsoldierSite.dat
+
+# Finally reset default gcc
+RUN sudo update-alternatives --remove-all gcc && \
+    sudo update-alternatives \
+        --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC_VERSION} ${GCC_VERSION} \
+        --slave /usr/bin/g++ g++ /usr/bin/g++-${GCC_VERSION} \
+        --slave /usr/bin/gcov gcov /usr/bin/gcov-${GCC_VERSION}
 
 # Clean up
 RUN sudo rm -rf /var/lib/apt/lists/* v2ray
